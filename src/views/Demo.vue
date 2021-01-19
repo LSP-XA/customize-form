@@ -1,0 +1,40 @@
+<template>
+  <div>
+    <div class="demo-item">
+      <label>v-model: </label><input-model v-model="modelVal" />
+    </div>
+    <div class="demo-item">
+      <label>sync: </label><input-sync :value.sync="syncVal" />
+    </div>
+    <div class="demo-item">
+      <label>hoc: </label><input-hoc v-model="hocVal" />
+    </div>
+  </div>
+</template>
+
+<script>
+import InputModel from '../components/input-model.vue';
+import InputSync from '../components/input-sync.vue';
+import InputHoc from '../components/input-hoc.vue';
+
+export default {
+  components: { InputModel, InputSync, InputHoc },
+  data() {
+    return {
+      modelVal: '',
+      syncVal: '',
+      hocVal: '',
+    };
+  },
+};
+</script>
+
+<style lang="less">
+.demo-item{
+  display: flex;
+  align-items: center;
+  label{
+    width: 100px;
+  }
+}
+</style>

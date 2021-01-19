@@ -7,7 +7,12 @@
       <label>sync: </label><input-sync :value.sync="syncVal" />
     </div>
     <div class="demo-item">
-      <label>hoc: </label><input-hoc v-model="hocVal" />
+      <label>hoc: </label>
+      <input-hoc v-model="hocVal">
+        <template v-slot:suffix>
+          <i class="el-input__icon el-icon-date"></i>
+        </template>
+      </input-hoc>
     </div>
   </div>
 </template>

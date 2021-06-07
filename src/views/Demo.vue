@@ -13,13 +13,12 @@
           <i class="el-input__icon el-icon-date"></i>
         </template>
       </input-hoc>
-       <l-table>
-            
-            <template v-slot:[`item.calories`]="{ data }">
-                <v-chip :color="getColor(data.calories)" dark>
-                    {{ data.calories }}
-                </v-chip>
-            </template>
+        <l-table>
+          <template v-slot:[`item.calories`]="{ item }">
+              <v-chip :color="getColor(item.calories)" dark>
+                  {{ item.calories }}
+              </v-chip>
+          </template>
         </l-table>
     </div>
   </div>
@@ -29,15 +28,23 @@
 import InputModel from '../components/input-model.vue';
 import InputSync from '../components/input-sync.vue';
 import InputHoc from '../components/input-hoc.vue';
-import LTable from '../components/LTable/LTable';
+import LTable from '../components/LTable/LTable.vue';
+
 export default {
-  components: { InputModel, InputSync, InputHoc,LTable },
+  components: { InputModel, InputSync, InputHoc, LTable },
   data() {
     return {
       modelVal: '',
       syncVal: '',
       hocVal: '',
     };
+  },
+  methods: {
+    getColor (calories) {
+      if (calories > 400) return 'red'
+      else if (calories > 200) return 'orange'
+      else return 'green'
+    },
   },
 };
 </script>

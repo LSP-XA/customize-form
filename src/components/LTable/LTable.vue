@@ -1,32 +1,13 @@
-<template>
-    <div class="l-table">
-        <v-data-table
-            ref="table"
-            v-model="selected"
-            :headers="headers"
-            :items="desserts"
-            :single-select="singleSelect"
-            item-key="name"
-            show-select
-            class="elevation-1"
-            checkbox-color="success"
-            hide-default-footer
-            :disable-pagination="true"
-            :height="tableHeight"
-            fixed-header
-        >
-         <template v-slot:[`item.calories`]="{ item }">
-                <slot :data="item">
-                </slot>
-            </template>
-        </v-data-table>
-        
-    </div>
-</template>
-
 <script>
 export default {
     name: 'LTable',
+    render(h) {
+        return this.renderTable(h)
+        return h('div', {
+            staticClass: 'l-table'
+        }, this.renderTable(h))
+    },
+
     data() {
         return {
             singleSelect: false,
@@ -171,11 +152,36 @@ export default {
                 )
             }, 1000)
         },
+        renderTable(h) {
+            return h('v-data-table', {
+                staticClass: 'elevation-1',
+                ref: 'table',
+                props: {
+                    headers: this.headers,
+                    items: this.desserts,
+                    ['single-select']: this.singleSelect,
+                    ['item-key']: "name",
+                    ['show-select']: true,
+                    ['checkbox-color']: "success",
+                    ['hide-default-footer']: true,
+                    ['disable-pagination']: true,
+                    height: this.tableHeight,
+                    ['fixed-header']: true,
+                    value: this.selected,
+                },
+                on: {
+                    input: (e) => {
+                        this.$emit('input', e)
+                    },
+                },
+                scopedSlots: this.$scopedSlots,
+            })
+        },
     },
 }
 </script>
 
-<style lang="scss">
+<style lang="less">
 .l-table {
     width: 100%;
     height: calc(100% - 200px);

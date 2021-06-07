@@ -20,6 +20,9 @@
               </v-chip>
           </template>
         </l-table>
+              <v-chip color="red">
+                  demo
+              </v-chip>
     </div>
   </div>
 </template>

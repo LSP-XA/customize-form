@@ -2,10 +2,9 @@
 export default {
     name: 'LTable',
     render(h) {
-        return this.renderTable(h)
         return h('div', {
             staticClass: 'l-table'
-        }, this.renderTable(h))
+        }, [this.renderTable(h)])
     },
 
     data() {
